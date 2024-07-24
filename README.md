@@ -1,35 +1,56 @@
 # php-hello-world
 A simple hello-world for composer
 
- [![Latest Stable Version](https://github.com/silarhi/php-hello-world/workflows/Tests/badge.svg)](https://github.com/silarhi/php-hello-world/workflows/Tests/badge.svg)
- [![Latest Stable Version](https://poser.pugx.org/silarhi/hello-world/v/stable)](https://packagist.org/packages/silarhi/hello-world)
-[![Total Downloads](https://poser.pugx.org/silarhi/hello-world/downloads)](https://packagist.org/packages/silarhi/hello-world)
-[![License](https://poser.pugx.org/silarhi/hello-world/license)](https://packagist.org/packages/silarhi/hello-world)
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
 
-[![SymfonyInsight](https://insight.symfony.com/projects/5d582202-1186-4ce7-82c7-c4d3a2c11807/big.svg)](https://insight.symfony.com/projects/5d582202-1186-4ce7-82c7-c4d3a2c11807)
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-Installation
+Installation using Dockerfile
 ------------
 
-Install with composer
-``` bash
-composer require silarhi/hello-world
-```
+Build Docker Imagebash
+docker build -t workshop .
+Run Docker Imagebash
+docker run -dp 0.0.0.0:8081:80 workshop
+Installation using docker-compose.yml
+------------
 
-Run composer update
-``` bash
-composer update silarhi/hello-world
-```
+Build and run Docker Imagebash
+docker-compose up -d
+Access the Application
+------------
 
-Usage
------
+Access the application using <ip-address>:8081
 
-``` php
-require_once __DIR__ . '/vendor/autoload.php';
+![Site Demo](https://github.com/snehaa-shrestha/powerworkshop-DevOps/blob/main/images/Web%20Browser.png)
 
-use Silarhi\Hello;
+Configure GitHub Actions
+------------
 
-$hello = new Hello();
-echo $hello->display() . "\n";
-```
+![GitHub Actions](https://github.com/snehaa-shrestha/powerworkshop-DevOps/blob/main/images/GitHub%20Action%20Workflow.png)
+
+Pushing Image to DockerHub
+------------
+
+Build Docker Imagebash
+docker build -t your_username/devops-workshop:php-hello-world .
+Login to DockerHubbash
+docker login
+Push the Docker Imagebash
+docker push your_username/devops-workshop:php-hello-world
+![DockerHub](https://github.com/snehaa-shrestha/powerworkshop-DevOps/blob/main/images/dockerhub%20tag.png)
+
+docker ps
+![Docker Ps](https://github.com/snehaa-shrestha/powerworkshop-DevOps/blob/main/images/docker%20ps.png)
